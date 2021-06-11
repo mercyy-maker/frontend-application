@@ -86,10 +86,11 @@
             '<table class="table table-bordered table-hover"> \n' +
             '   <thead>\n' +
             '       <tr>\n' +
-            '           <th scope="col">ISBN</th> \n'+
             '           <th scope="col">Book Name</th> \n'+
+            '           <th scope="col">Book Description</th> \n'+
             '           <th scope="col">Author Name</th> \n'+
             '           <th scope="col">Price</th> \n'+
+            '           <th scope="col">Year</th> \n'+
             '       </tr>\n' +
             '   </thead>\n' +
             '   <tbody>\n';
@@ -97,10 +98,11 @@
         for (let book in data){
             table +=
                 '       <tr>\n' +
-                '           <td>' + data[book]["isbn"]+  '</td>\n' +
                 '           <td>' + data[book]["bookName"]+  '</td>\n' +
+                '           <td>' + data[book]["bookDescription"]+  '</td>\n' +
                 '           <td>' + data[book]["authorName"]+  '</td>\n' +
                 '           <td>' + data[book]["bookPrice"]+  '</td>\n' +
+                '           <td>' + data[book]["bookYear"]+  '</td>\n' +
                 '       </tr>\n';
         }
 
