@@ -79,6 +79,7 @@
         </p>
     </div>
 </div>
+
 <script>
     function CreateTable(data){
         let table = "";
@@ -86,9 +87,9 @@
             '<table class="table table-bordered table-hover"> \n' +
             '   <thead>\n' +
             '       <tr>\n' +
-            '           <th scope="col">Book Name</th> \n'+
-            '           <th scope="col">Book Description</th> \n'+
-            '           <th scope="col">Author Name</th> \n'+
+            '           <th scope="col">Title</th> \n'+
+            '           <th scope="col">Description</th> \n'+
+            '           <th scope="col">Author</th> \n'+
             '           <th scope="col">Price</th> \n'+
             '           <th scope="col">Year</th> \n'+
             '       </tr>\n' +
@@ -98,11 +99,11 @@
         for (let book in data){
             table +=
                 '       <tr>\n' +
-                '           <td>' + data[book]["bookName"]+  '</td>\n' +
-                '           <td>' + data[book]["bookDescription"]+  '</td>\n' +
-                '           <td>' + data[book]["authorName"]+  '</td>\n' +
-                '           <td>' + data[book]["bookPrice"]+  '</td>\n' +
-                '           <td>' + data[book]["bookYear"]+  '</td>\n' +
+                '           <td>' + data[book]["Title"]+  '</td>\n' +
+                '           <td>' + data[book]["description"]+  '</td>\n' +
+                '           <td>' + data[book]["author"]+  '</td>\n' +
+                '           <td>' + data[book]["Price"]+  '</td>\n' +
+                '           <td>' + data[book]["Year"]+  '</td>\n' +
                 '       </tr>\n';
         }
 
@@ -112,7 +113,7 @@
         return table;
     }
     document.getElementById("btnLoadbooks").addEventListener("click", (event) =>{
-        let url = "https://rocky-harbor-56739.herokuapp.com/api/books/"
+        let url = "https://rocky-harbor-56739.herokuapp.com/api/books"
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function (){
             if (this.readyState == 4 && this.status == 200){
@@ -127,6 +128,6 @@
     });
 </script>
 
-
+\
 </body>
 </html>
