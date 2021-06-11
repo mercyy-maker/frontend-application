@@ -80,5 +80,42 @@
     </div>
 </div>
 
+<script>
+
+    document.getElementById("btnAddBook").addEventListener("click", (event) =>{
+
+        if (document.getElementById('title').value === "" || document.getElementById('title').value.length === 0 ||
+            document.getElementById('description').value === "" || document.getElementById('description').value.length === 0 ||
+            document.getElementById('year').value === "" || document.getElementById('year').value.length === 0 ||
+            document.getElementById('author').value === "" || document.getElementById('author').value.length === 0
+            || document.getElementById('price').value === "" || document.getElementById('price').value.length === 0) {
+            alert("ERROR: fill all fields");
+        }
+
+        let url = "https://rocky-harbor-56739.herokuapp.com/api/books/"
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function (){
+            if (this.readyState == 4 && this.status == 200){
+                document.getElementById("output").innerHTML = "Book added!"
+            }
+            if ( this.status == 404 || this.status == 500 ){
+                document.getElementById("output").innerHTML = "<pre>" + this.responseText + "</pre>";
+            }
+
+        };
+
+        let bookData = "title=" + document.getElementById("title").value + "&" +
+            "description=" + document.getElementById("description").value + "&" +
+            "year="  + document.getElementById("year").value  + "&" +
+            "author=" + document.getElementById("author").value  + "&" +
+            "price="  + document.getElementById("price").value;
+
+        xhttp.open('POST', url, true);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send(bookData);
+    });
+</script>
+</body>
+</html>
 </body>
 </html>
