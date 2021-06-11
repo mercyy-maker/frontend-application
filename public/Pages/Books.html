@@ -65,17 +65,17 @@
             </ul>
         </div>
     </nav>
-    <div>
+
 
         <div class="container">
+            <button class="btn btn-outline-primary" id="btnLoadBooks">Show Books</button>
 
             <div class="jumbotron" style="background-color:peachpuff; margin-top: 20px" id="output">
             </div>
 
-            <button class="btn btn-outline-success" id="btnLoadBooks">Show Books</button>
         </div>
 
-    </div>
+
     <div class="header" style="color: #555555 ; background-color: peachpuff">
         <p style="margin-top: 20px; text-align: center"> <span style="font-family: 'Gill Sans'; font-size: 30px">Mercy's Library</span>  <br>
             2983 13th Ave NE<br>
@@ -94,12 +94,10 @@
             '<table class="table table-bordered table-hover table-light"> \n' +
             '   <thead>\n' +
             '       <tr>\n' +
-            '           <th scope="col">ID</th> \n'+
             '           <th scope="col">Title</th> \n'+
             '           <th scope="col">Description</th> \n'+
             '           <th scope="col">Year</th> \n'+
             '           <th scope="col">Author Name</th> \n'+
-            '           <th scope="col">Hardcover</th> \n'+
             '           <th scope="col">Price</th> \n'+
             '       </tr>\n' +
             '   </thead>\n' +
@@ -108,12 +106,10 @@
         for (let book in data){
             table +=
                 '       <tr>\n' +
-                '           <td>' + data[book]["id"]+  '</td>\n' +
                 '           <td>' + data[book]["title"]+  '</td>\n' +
                 '           <td>' + data[book]["description"]+  '</td>\n' +
                 '           <td>' + data[book]["year"]+  '</td>\n' +
                 '           <td>' + data[book]["author"]+  '</td>\n' +
-                '           <td>' + data[book]["hardcover"]+  '</td>\n' +
                 '           <td>' + "$" + data[book]["price"]+  '</td>\n' +
                 '       </tr>\n';
         }
@@ -124,7 +120,7 @@
         return table;
     }
     document.getElementById("btnLoadBooks").addEventListener("click", (event) =>{
-        let url = "         "
+        let url = "https://rocky-harbor-56739.herokuapp.com/api/books/"
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function (){
             if (this.readyState == 4 && this.status == 200){
