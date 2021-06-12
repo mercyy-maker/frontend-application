@@ -48,7 +48,7 @@
                     <a style="font-weight: bold; font-size: xx-large; margin-left: 10px; margin-right: 10px">/</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Add.html">Add</a>
+                    <a class="nav-link" href="ed.html">Add</a>
                 </li>
                 <li class="nav-item">
                     <a style="font-weight: bold; font-size: xx-large; margin-left: 10px; margin-right: 10px">/</a>
@@ -68,15 +68,75 @@
             </ul>
         </div>
     </nav>
-    <div>
 
-        <h1>Come read our books and relax!</h1>
+    <div class="container">
+        <h1>Remove a Book</h1>
+        <form method="DELETE"
+              action="https://rocky-harbor-56739.herokuapp.com/api/books/">
 
-        <h2>
-            <br>
-            Thank you.</h2>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" title="title" id="title" class="form-control"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" title="description" id="description" class="form-control"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="year">year:</label>
+                <input type="year" title="year" id="year" class="form-control"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="author">Author:</label>
+                <input type="text" title="author" id="author" class="form-control"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" title="price" id="price" class="form-control"
+                >
+            </div>
+
+        </form>
+
+
+        <div class="jumbotron" id="output" style="margin-top: 20px; background-color: peachpuff">
+            <button class="btn btn-lg btn-outline-success" id="btnAddBook">Remove Book</button>
+        </div>
 
     </div>
+</div>
+<script>
+    document.getElementById("btnAddBook").addEventListener("click", (event) =>{
+        let url = "https://rocky-harbor-56739.herokuapp.com/api/books"+ document.getElementById("id").value;
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function (){
+            if (this.readyState == 4 && this.status == 200){
+                document.getElementById("output").innerHTML = "Book successfully Added!"
+                //"<pre>" + this.responseText + "</pre>";
+                if ( this.status == 404 || this.status == 500 ){
+                    document.getElementById("output").innerHTML = "<pre>" + this.responseText + "</pre>";
+                }
+        };
+        // foo=bar&lorem=ipsum
+        let bookData = "title=" + document.getElementById("title").value + "&" +
+            "description=" + document.getElementById("description").value  + "&" +
+            "year="  + document.getElementById("year").value  + "&" +
+            "price="  + document.getElementById("price").value;
+        xhttp.open('DELETE', url, true);
+        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhttp.send(bookData);
+    });
+</script>
+
+
     <div class="header" style="color: #555555 ; background-color: peachpuff">
         <p style="margin-top: 20px; text-align: center"> <span style="font-family: 'Gill Sans'; font-size: 30px">Mercy's Library</span>  <br>
             2983 13th Ave NE<br>

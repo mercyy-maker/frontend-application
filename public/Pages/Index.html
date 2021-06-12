@@ -79,7 +79,6 @@
         </p>
     </div>
 </div>
-
 <script>
     function CreateTable(data){
         let table = "";
@@ -87,23 +86,24 @@
             '<table class="table table-bordered table-hover"> \n' +
             '   <thead>\n' +
             '       <tr>\n' +
-            '           <th scope="col">Title</th> \n'+
+            '           <th scope="col">Book Title</th> \n'+
             '           <th scope="col">Description</th> \n'+
-            '           <th scope="col">Author</th> \n'+
-            '           <th scope="col">Price</th> \n'+
             '           <th scope="col">Year</th> \n'+
+            '           <th scope="col">author</th> \n'+
+            '           <th scope="col">Price</th> \n'+
+
             '       </tr>\n' +
             '   </thead>\n' +
             '   <tbody>\n';
 
-        for (let book in data){
+        for (let friend in data){
             table +=
                 '       <tr>\n' +
-                '           <td>' + data[book]["Title"]+  '</td>\n' +
-                '           <td>' + data[book]["description"]+  '</td>\n' +
-                '           <td>' + data[book]["author"]+  '</td>\n' +
-                '           <td>' + data[book]["Price"]+  '</td>\n' +
-                '           <td>' + data[book]["Year"]+  '</td>\n' +
+                '           <td>' + data[friend]["title"]+  '</td>\n' +
+                '           <td>' + data[friend]["description"]+  '</td>\n' +
+                '           <td>' + data[friend]["year"]+  '</td>\n' +
+                '           <td>' + data[friend]["author"]+  '</td>\n' +
+                '           <td>' + data[friend]["price"]+  '</td>\n' +
                 '       </tr>\n';
         }
 
@@ -112,7 +112,7 @@
             '</table>\n'
         return table;
     }
-    document.getElementById("btnLoadbooks").addEventListener("click", (event) =>{
+    document.getElementById("btnLoadFriends").addEventListener("click", (event) =>{
         let url = "https://rocky-harbor-56739.herokuapp.com/api/books"
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function (){
@@ -121,13 +121,10 @@
                     CreateTable(JSON.parse(this.responseText));
             }
         };
-        if (xhttp.withCredentials !== xhttp){
-            xhttp.open('GET', url, true);
-            xhttp.send();
-        }
+        xhttp.open('GET', url, true);
+        xhttp.send();
     });
 </script>
 
-\
 </body>
 </html>
