@@ -63,29 +63,87 @@
                     <a class="nav-link" href="Remove.html">Remove</a>
                 </li>
 
-
-
             </ul>
         </div>
     </nav>
     <div>
 
-
-
-
-
-
-
     </div>
-    <div class="header" style="color: #555555 ; background-color: peachpuff">
-        <p style="margin-top: 20px; text-align: center"> <span style="font-family: 'Gill Sans'; font-size: 30px">Mercy's Library</span>  <br>
-            2983 13th Ave NE<br>
-            Seattle, WA 98114 <br>
-            Open 8:00 a.m. - 11:00 p.m.<br>
 
-            Copyright © 2020 Mercy's Library
-        </p>
+    <div class="container">
+
+        <p style="color: blue; margin-top: 20px">Enter the id of the book you would like to find</p>
+
+        <div class="form-group">
+            <label for="id">ID</label>
+
+
+            <input type="text" class="form-control" id="id" name="id">
+        </div>
+
+        <button class="btn btn-lg btn-outline-primary" id="btnSearchBook" onclick="findBook()">Search Book</button>
+
+
+        <script>
+            function findBook() {
+
+                if(document.getElementById('isbn').value === "" || document.getElementById('isbn').value.length === 0){
+                    alert("ERROR: fill all fields");
+                }
+
+                let url = "https://rocky-harbor-56739.herokuapp.com/api/books"
+                let xhttp = new XMLHttpRequest();
+                let isbn = document.getElementById('id').value;
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("output").innerHTML = CreateTable1(JSON.parse(this.responseText));
+                    }
+                    if ( this.status == 404 || this.status == 500 ){
+                        document.getElementById("output").innerHTML = "No such book with this ISBN!";
+                    }
+                };
+                xhttp.open('GET', url + isbn, true);
+                xhttp.send();
+            }
+            function CreateTable1(data) {
+                let table = "";
+                table =
+                    '<table class="table table-bordered table-hover"> \n' +
+                    '   <thead>\n' +
+                    '       <tr>\n' +
+                    '           <th scope="col">Book Title</th> \n'+
+                    '           <th scope="col">Description</th> \n'+
+                    '           <th scope="col">Year</th> \n'+
+                    '           <th scope="col">author</th> \n'+
+                    '           <th scope="col">Price</th> \n'+
+
+                    '       </tr>\n' +
+                    '   </thead>\n' +
+                    '   <tbody>\n';
+
+                for (let friend in data){
+                    table +=
+                        '       <tr>\n' +
+                        '           <td>' + data[friend]["title"]+  '</td>\n' +
+                        '           <td>' + data[friend]["description"]+  '</td>\n' +
+                        '           <td>' + data[friend]["year"]+  '</td>\n' +
+                        '           <td>' + data[friend]["author"]+  '</td>\n' +
+                        '           <td>' + data[friend]["price"]+  '</td>\n' +
+                        '       </tr>\n';
+                }
+
+                table +=
+                    '   </tbody>\n' +
+                    '</table>\n'
+                return table;
+
+            }
+
+  </script>
     </div>
 </div>
 </body>
 </html>
+
+
+
