@@ -80,15 +80,15 @@
 
             <input type="text" class="form-control" id="id" name="id">
         </div>
-
+        <div class="jumbotron" id="output" style="margin-top: 20px; background-color: peachpuff">
         <button class="btn btn-lg btn-outline-primary" id="btnSearchBook" onclick="findBook()">Search Book</button>
 
 
         <script>
             function findBook() {
 
-                if(document.getElementById('isbn').value === "" || document.getElementById('isbn').value.length === 0){
-                    alert("ERROR: fill all fields");
+                if(document.getElementById('id').value === "" || document.getElementById('id').value.length === 0){
+                    alert("ERROR: please fill out all the information");
                 }
 
                 let url = "https://rocky-harbor-56739.herokuapp.com/api/books"
