@@ -72,7 +72,7 @@
 
     <div class="container">
 
-        <p style="color: blue; margin-top: 20px">Enter the id of the book you would like to find</p>
+        <p>Please enter the id of the book</p>
 
         <div class="form-group">
             <label for="id">ID</label>
@@ -80,12 +80,14 @@
 
             <input type="text" class="form-control" id="id" name="id">
         </div>
-        <div class="jumbotron" id="output" style="margin-top: 20px; background-color: peachpuff">
-        <button class="btn btn-lg btn-outline-primary" id="btnSearchBook" onclick="findBook()">Search Book</button>
+        <button class="btn btn-lg btn-outline-primary" id="btnSearchBook" onclick="showBook()">Search Book</button>
+
+        <div class="jumbotron" style="background-color: peachpuff; margin-top: 20px" id="output"></div>
+
 
 
         <script>
-            function findBook() {
+            function showBook() {
 
                 if(document.getElementById('id').value === "" || document.getElementById('id').value.length === 0){
                     alert("ERROR: please fill out all the information");
@@ -93,19 +95,19 @@
 
                 let url = "https://rocky-harbor-56739.herokuapp.com/api/books"
                 let xhttp = new XMLHttpRequest();
-                let isbn = document.getElementById('id').value;
+                let id = document.getElementById('id').value;
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("output").innerHTML = CreateTable1(JSON.parse(this.responseText));
+                        document.getElementById("output").innerHTML = CreateTable(JSON.parse(this.responseText));
                     }
                     if ( this.status == 404 || this.status == 500 ){
-                        document.getElementById("output").innerHTML = "No such book with this ISBN!";
+                        document.getElementById("output").innerHTML = "No book found with this ID!";
                     }
                 };
-                xhttp.open('GET', url + isbn, true);
+                xhttp.open('GET', url + id, true);
                 xhttp.send();
             }
-            function CreateTable1(data) {
+            function CreateTable(data) {
                 let table = "";
                 table =
                     '<table class="table table-bordered table-hover"> \n' +
@@ -121,14 +123,14 @@
                     '   </thead>\n' +
                     '   <tbody>\n';
 
-                for (let friend in data){
+                for (let book in data){
                     table +=
                         '       <tr>\n' +
-                        '           <td>' + data[friend]["title"]+  '</td>\n' +
-                        '           <td>' + data[friend]["description"]+  '</td>\n' +
-                        '           <td>' + data[friend]["year"]+  '</td>\n' +
-                        '           <td>' + data[friend]["author"]+  '</td>\n' +
-                        '           <td>' + data[friend]["price"]+  '</td>\n' +
+                        '           <td>' + data[book]["title"]+  '</td>\n' +
+                        '           <td>' + data[book]["description"]+  '</td>\n' +
+                        '           <td>' + data[book]["year"]+  '</td>\n' +
+                        '           <td>' + data[book]["author"]+  '</td>\n' +
+                        '           <td>' + data[book]["price"]+  '</td>\n' +
                         '       </tr>\n';
                 }
 
