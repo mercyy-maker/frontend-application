@@ -53,6 +53,8 @@ h2{
 .menu1 {
   float: left;
   clear: both;
+  color: darkseagreen;
+  font-family: Georgia;
 }
 .p{
   color: black;
