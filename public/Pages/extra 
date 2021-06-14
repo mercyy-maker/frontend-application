@@ -1,2 +1,0 @@
- <div class="jumbotron" id="output" style="margin-top: 20px; background-color: peachpuff">
-        <button class= "btn btn-lg btn-outline-primary" id="btnSearchBook" onclick="showBook()">Search Book</button>

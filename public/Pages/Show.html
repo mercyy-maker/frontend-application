@@ -101,7 +101,7 @@
                         document.getElementById("output").innerHTML = CreateTable(JSON.parse(this.responseText));
                     }
                     if ( this.status == 404 || this.status == 500 ){
-                        document.getElementById("output").innerHTML = "No book found with this ID!";
+                        document.getElementById("output").innerHTML = "There is No Book with this ID!";
                     }
                 };
                 xhttp.open('GET', url + id, true);
