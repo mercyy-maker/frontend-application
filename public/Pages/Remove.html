@@ -63,59 +63,88 @@
                     <a class="nav-link" href="Remove.html">Remove</a>
                 </li>
 
-
-
             </ul>
         </div>
     </nav>
-
-    <div class="container">
-        <h1>Remove a Book</h1>
-        <form method="DELETE"
-              action="https://rocky-harbor-56739.herokuapp.com/api/books/">
-
-            <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" title="title" id="title" class="form-control"
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="description">Description:</label>
-                <input type="text" title="description" id="description" class="form-control"
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="year">year:</label>
-                <input type="year" title="year" id="year" class="form-control"
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="author">Author:</label>
-                <input type="text" title="author" id="author" class="form-control"
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="price">Price:</label>
-                <input type="number" title="price" id="price" class="form-control"
-                >
-            </div>
-
-        </form>
-
-
-        <div class="jumbotron" id="output" style="margin-top: 20px; background-color: peachpuff">
-            <button class="btn btn-lg btn-outline-success" id="btnAddBook">Remove Book</button>
-        </div>
+    <div>
 
     </div>
-</div>
+
+    <div class="container">
+
+        <p>Please enter the id of the book</p>
+
+        <div class="form-group">
+            <label for="id">ID</label>
+
+
+            <input type="text" class="form-control" id="id" name="id">
+        </div>
+        <button class="btn btn-lg btn-outline-primary" id="btnSearchBook" onclick="showBook()">Search Book</button>
+
+        <div class="jumbotron" style="background-color: peachpuff; margin-top: 20px" id="output"></div>
+
+        <script>
+            function showBook() {
+
+                if(document.getElementById('id').value === "" || document.getElementById('id').value.length === 0){
+                    alert("ERROR: please fill out all the information");
+                }
+
+                let url = "https://rocky-harbor-56739.herokuapp.com/api/books"
+                let xhttp = new XMLHttpRequest();
+                let id = document.getElementById('id').value;
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("output").innerHTML = CreateTable(JSON.parse(this.responseText));
+                    }
+                    if ( this.status == 404 || this.status == 500 ){
+                        document.getElementById("output").innerHTML = "There is No Book with this ID!";
+                    }
+                };
+                xhttp.open('GET', url + id, true);
+                xhttp.send();
+            }
+            function CreateTable(data) {
+                let table = "";
+                table =
+                    '<table class="table table-bordered table-hover"> \n' +
+                    '   <thead>\n' +
+                    '       <tr>\n' +
+                    '           <th scope="col">Book Title</th> \n'+
+                    '           <th scope="col">Description</th> \n'+
+                    '           <th scope="col">Year</th> \n'+
+                    '           <th scope="col">author</th> \n'+
+                    '           <th scope="col">Price</th> \n'+
+
+                    '       </tr>\n' +
+                    '   </thead>\n' +
+                    '   <tbody>\n';
+
+                for (let book in data){
+                    table +=
+                        '       <tr>\n' +
+                        '           <td>' + data[book]["title"]+  '</td>\n' +
+                        '           <td>' + data[book]["description"]+  '</td>\n' +
+                        '           <td>' + data[book]["year"]+  '</td>\n' +
+                        '           <td>' + data[book]["author"]+  '</td>\n' +
+                        '           <td>' + data[book]["price"]+  '</td>\n' +
+                        '       </tr>\n';
+                }
+
+                table +=
+                    '   </tbody>\n' +
+                    '</table>\n'
+                return table;
+
+            }
+
+        </script>
+
+
 <script>
     console.log()
-    document.getElementById("btnAddBook").addEventListener("click", (event) =>{
+    document.getElementById("btnRemoveBook").addEventListener("click", (event) =>{
 
         if (document.getElementById('title').value === "" || document.getElementById('title').value.length === 0 ||
             document.getElementById('description').value === "" || document.getElementById('description').value.length === 0
@@ -144,7 +173,6 @@
         xhttp.send(bookData);
     });
 </script>
-</body>
     <div class="header" style="color: #555555 ; background-color: peachpuff">
         <p style="margin-top: 20px; text-align: center"> <span style="font-family: 'Gill Sans'; font-size: 30px">Mercy's Library</span>  <br>
             2983 13th Ave NE<br>
